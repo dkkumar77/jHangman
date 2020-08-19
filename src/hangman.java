@@ -36,16 +36,10 @@ public class hangman {
                                 if (isSolved()){
                                     System.out.println("You Win");
                                     break;
-
                                 }
-
-
                             }
                         }
-
                         System.out.println(currentGuess + " is in the word!");
-
-
                     }
 
                 } else {
@@ -57,23 +51,14 @@ public class hangman {
                     else{
                         System.out.println("ran out of guesses");
                         break;
-
-
                     }
-
-
                 }
             } else {
                 System.out.println("invalid input");
-
             }
-
             System.out.println(guiDisplay.toString());
-
         }
-
         System.out.println("\n\n");
-
         do {
            System.out.println("1 to play again, anything else to exit");
            int answer = in.nextInt();
@@ -83,15 +68,10 @@ public class hangman {
            }
            else{
                System.exit(0);
-
            }
 
         }while(userRedo == false);
-
-
     }
-
-
 
     public void storeArrays(){
 
@@ -100,13 +80,8 @@ public class hangman {
 
         for(int i=0; i<stringLength; i++){
             arrayHidden.add(tempVar.charAt(i));
-
             guiDisplay.add('_');
-
-
-
         }
-
     }
 
     private boolean isSolved(){
