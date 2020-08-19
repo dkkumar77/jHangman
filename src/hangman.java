@@ -12,7 +12,9 @@ public class hangman {
     private String tempVar = "test";
     private int guess = 5;
 
+    private boolean userRedo ;
 
+    //
     public hangman() {
         stringLength = tempVar.length();
         storeArrays();
@@ -20,7 +22,7 @@ public class hangman {
         alreadyGuessed = new ArrayList<>();
         while (guess > 0 && !isSolved()) {
 
-            System.out.println("Enter a character");
+            System.out.println("Enter a character\n");
             String currentGuess = in.nextLine();
             char charVariant = currentGuess.toLowerCase().charAt(0);
 
@@ -69,6 +71,23 @@ public class hangman {
             System.out.println(guiDisplay.toString());
 
         }
+
+        System.out.println("\n\n");
+
+        do {
+           System.out.println("1 to play again, anything else to exit");
+           int answer = in.nextInt();
+           if(answer == 1){
+               System.out.println("\n");
+               new hangman();
+           }
+           else{
+               System.exit(0);
+
+           }
+
+        }while(userRedo == false);
+
 
     }
 
