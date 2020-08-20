@@ -1,5 +1,9 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class hangman {
 
@@ -9,13 +13,20 @@ public class hangman {
     private ArrayList<Character> alreadyGuessed;
 
     private int stringLength;
-    private String tempVar = "test";
+    private String tempVar ;
     private int guess = 5;
 
     private boolean userRedo ;
 
     //
     public hangman() {
+
+        try {
+            tempVar = generateWord();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
         stringLength = tempVar.length();
         storeArrays();
         Scanner in = new Scanner(System.in);
@@ -26,7 +37,7 @@ public class hangman {
             String currentGuess = in.nextLine();
             char charVariant = currentGuess.toLowerCase().charAt(0);
 
-            if (currentGuess.matches("^[a-zA-Z]*$") && (currentGuess.length() == 1)) {
+            if (currentGuess.matches("^[a-zA-Z]*$") && (currentGuess.length() == 1) && !currentGuess.isEmpty())  {
                 if (arrayHidden.contains(charVariant)) {
                     if (!alreadyGuessed.contains(currentGuess)) {
                         for (int i = 0; i < arrayHidden.size(); i++) {
@@ -43,7 +54,7 @@ public class hangman {
                     }
 
                 } else {
-                    if(guess>1) {
+                    if(guess>1){
                         System.out.println("Try again");
                         guess--;
                         alreadyGuessed.add(currentGuess.charAt(0));
@@ -82,6 +93,11 @@ public class hangman {
             arrayHidden.add(tempVar.charAt(i));
             guiDisplay.add('_');
         }
+    }
+
+    public String generateWord() throws IOException {
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 82 + 1);
+        return Files.readAllLines(Paths.get("src/wordList.txt")).get(randomNum);
     }
 
     private boolean isSolved(){
